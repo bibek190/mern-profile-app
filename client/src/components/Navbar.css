@@ -1,0 +1,21 @@
+.container {
+  max-width: 140rem;
+  /* height: 20px; */
+  padding: 3.3rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.3rem;
+}
+
+ul {
+  display: flex;
+  gap: 3.2rem;
+}
+
+li {
+  list-style: none;
+  text-decoration: none;
+}
+li a {
+  text-decoration: none;
+}
