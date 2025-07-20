@@ -16,6 +16,7 @@ li {
   list-style: none;
   text-decoration: none;
 }
-li a {
+a {
   text-decoration: none;
+  color: #ffffff;
 }

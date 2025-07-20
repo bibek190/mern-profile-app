@@ -2,29 +2,19 @@ const validate = (schema) => async (req, res, next) => {
   try {
     const parseBody = await schema.parseAsync(req.body);
     req.body = parseBody;
-    next();
+    return next();
   } catch (err) {
-    console.error("Validation error:", err);
+    const status = 422;
+    const message = "Fill the input properly";
+    const extraDetails = err.issues.map((curElem) => curElem.message);
 
-    // Handle Zod validation errors
-    if (err.issues) {
-      // Zod v3+ uses 'issues' instead of 'errors'
-      const firstError = err.issues[0];
-      return res.status(400).json({
-        success: false,
-        error: {
-          field: firstError.path[0], // Gets the field name
-          message: firstError.message, // Gets the error message
-          code: firstError.code, // Optional: includes error code
-        },
-      });
-    }
+    const error = {
+      status,
+      message,
+      extraDetails,
+    };
 
-    // Fallback for other errors
-    return res.status(500).json({
-      success: false,
-      message: "Internal server error",
-    });
+    next(error);
   }
 };
 

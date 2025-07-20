@@ -3,13 +3,14 @@
   padding: 0;
   box-sizing: border-box;
 }
-body {
-  background-color: rgba(68, 40, 5, 0.5);
-}
+
 html {
   font-size: 82.5%;
 }
-
+body {
+  background-color: rgb(141, 136, 130);
+  color: #ffffff;
+}
 /* register.css */
 .register {
   display: flex;
@@ -54,4 +55,29 @@ html {
 }
 .registerButton button {
   padding: 5px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.error-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5rem;
+  margin: 2rem;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
