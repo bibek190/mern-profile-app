@@ -81,3 +81,19 @@ a {
   justify-content: center;
   align-items: center;
 }
+
+.service-container {
+  background-color: antiquewhite;
+  padding: 4rem;
+  color: black;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+.service-element {
+  background: linear-gradient(#c8cbcb, #74757f);
+  width: 20rem;
+  padding: 1rem;
+  border-radius: 5px;
+}

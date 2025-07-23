@@ -1,22 +1,38 @@
 import React, { useState } from "react";
+import { useAuth } from "../store/auth";
 
 const Contact = () => {
-  const [user, setUser] = useState({
+  const [contact, setContact] = useState({
     username: "",
     email: "",
     message: "",
   });
 
+  const [userData, setUserData] = useState(true);
+
+  const { user } = useAuth();
+
+  if (userData && user) {
+    setContact({
+      username: user.username,
+      email: user.email,
+      message: "",
+    });
+    setUserData(false);
+  }
+
+  // const { contact } = useAuth();
+
   const handleInput = (e) => {
     let name = e.target.name;
     let value = e.target.value;
 
-    setUser({ ...user, [name]: value });
+    setContact({ ...contact, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(user);
+    console.log(contact);
   };
 
   return (
@@ -34,7 +50,7 @@ const Contact = () => {
                 placeholder="username"
                 id="username"
                 autoComplete="off"
-                value={user.username}
+                value={contact.username}
                 onChange={handleInput}
               />
             </div>
@@ -46,7 +62,7 @@ const Contact = () => {
                 placeholder="Enter your email"
                 id="email"
                 autoComplete="off"
-                value={user.email}
+                value={contact.email}
                 onChange={handleInput}
               />
             </div>
@@ -61,9 +77,7 @@ const Contact = () => {
                 placeholder="Enter your message"
                 id="message"
                 autoComplete="off"
-                rows="5"
-                cols="30"
-                value={user.message}
+                value={contact.message}
                 onChange={handleInput}
               />
             </div>

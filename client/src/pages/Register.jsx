@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../store/auth";
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -10,6 +11,7 @@ const Register = () => {
   });
 
   const navigate = useNavigate();
+  const { storetokenInLS } = useAuth();
 
   const handleInput = (e) => {
     let name = e.target.name;
@@ -20,7 +22,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("user", user);
+
     try {
       const response = await fetch("http://localhost:8000/api/auth/register", {
         method: "POST",
@@ -29,7 +31,13 @@ const Register = () => {
         },
         body: JSON.stringify(user),
       });
+      const res_data = await response.json();
+      console.log("res from server", res_data.extraDetails);
+
       if (response.ok) {
+        // store to local storage
+        storetokenInLS(res_data.token);
+
         setUser({
           username: "",
           email: "",
@@ -37,11 +45,11 @@ const Register = () => {
           password: "",
         });
         navigate("/login");
+      } else {
+        alert(res_data.extraDetails ? res_data.extraDetails : res_data.message);
       }
-
-      console.log(response);
     } catch (err) {
-      console.log("register", err.message);
+      console.log("register", err);
     }
   };
 
